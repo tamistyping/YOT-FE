@@ -1,23 +1,30 @@
-import { Button, Typography } from "@mui/material";
+import { Button, Typography, Dialog, DialogContent } from "@mui/material";
 import LoginForm from "../components/LoginForm";
-import SignupForm from "../components/SignupForm";
+import SignupForm from "../modals/SignupForm";
+import { useState } from "react";
 
 export default function LandingPage() {
-  function handleClick() {
-    const signupForm = document.getElementById("signupForm");
-    signupForm.scrollIntoView({ behavior: "smooth" });
-  }
+  const [openSignupModal, setOpenSignupModal] = useState(false);
+
+  const handleModalClick = () => {
+    setOpenSignupModal(true);
+  };
+
+  const handleCloseSignupModal = () => {
+    setOpenSignupModal(false);
+  };
 
   return (
     <div
       style={{
         backgroundColor: "#071013",
-        minHeight: "100vh",
-        paddingTop: "7vmin",
+        minHeight: "90vh",
+        paddingTop: "5vmin",
         paddingBottom: "20vmin",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        maxWidth: '100%'
       }}
     >
       <LoginForm />
@@ -40,20 +47,29 @@ export default function LandingPage() {
         >
           Don't have an account?
         </Typography>
-
-        <div style={{ width: "fit-content", margin: "auto" }}>
-          <Button
-            variant="contained"
-            sx={{ color: "white", backgroundColor: "#75ABBC", mb: '20vmin', paddingRight: '30px', paddingLeft: '30px' }}
-            onClick={handleClick}
-          >
-            Click Here
-          </Button>
-        </div>
       </div>
-      <div id="signupForm">
-        <SignupForm />
+      
+      <div>
+        <Button
+          variant="contained"
+          sx={{
+            color: 'white',
+            backgroundColor: '#75ABBC',
+            mb: 1.3,
+            paddingRight: '30px',
+            paddingLeft: '30px',
+          }}
+          onClick={handleModalClick}
+        >
+          Click Here
+        </Button>
       </div>
+      
+      <Dialog open={openSignupModal} onClose={handleCloseSignupModal}>
+        <DialogContent sx={{backgroundColor: 'black'}}>
+          <SignupForm handleClose={handleCloseSignupModal} />
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

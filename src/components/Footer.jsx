@@ -27,7 +27,7 @@ export default function Footer() {
           {"."}
         </Typography>
       </Container>
-      <Container maxWidth="sm" align="right" sx={{ paddingRight: 4 }}>
+      <Container maxWidth="sm" align="right" sx={{ paddingRight: '8vmin' }}>
         <a href="https://www.linkedin.com/in/tamparlak/" target="_blank" rel="noopener noreferrer">
           <LinkedInIcon />
         </a>
