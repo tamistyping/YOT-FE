@@ -17,6 +17,10 @@ const style = {
 };
 
 export default function GameDetailModal({ open, game, onClose }) {
+  const convertTimestampToDate = (timestamp) => {
+    const date = new Date(timestamp * 1000); // Convert seconds to milliseconds
+    return date.toLocaleDateString(); // Format date as a string
+  };
   return (
     <Modal
       open={open}
@@ -31,9 +35,9 @@ export default function GameDetailModal({ open, game, onClose }) {
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
           Summary: {game.summary}
           <br />
-          Release Date: {game.release_date}
+          Release Date: {convertTimestampToDate(game.first_release_date)}
           <br />
-          Rating: {game.rating}
+          Rating: {Math.round(game.rating)}
         </Typography>
         <Button onClick={onClose}>Close</Button>
         <Button >More Details</Button>

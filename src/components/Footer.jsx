@@ -13,7 +13,6 @@ export default function Footer() {
         px: 2,
         backgroundColor: "#23B5D3", // Updated background color
         color: "white",
-        position: "fixed",
         bottom: 0,
         width: "100%",
         display: "flex", // Added flex display
