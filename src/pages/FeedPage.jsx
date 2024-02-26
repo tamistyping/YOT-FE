@@ -8,7 +8,7 @@ export default function FeedPage() {
   return (
     <>
       <NavBar />
-
+        
       <Footer />
     </>
   );
