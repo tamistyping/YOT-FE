@@ -1,34 +1,74 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import NavBar from "../components/NavBar";
+import GameCard from "../components/GameCard";
+import GameDetailModal from "../modals/GameDetailModal";
 
 export default function DiscoverPage() {
   const [games, setGames] = useState([]);
+  const [anticipatedGames, setAnticipatedGames] = useState([]);
+  const [selectedGame, setSelectedGame] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
-    axios.get('http://localhost:8000/games/top-rated-games/')
-      .then(response => {
-        setGames(response.data.games); // Assuming the response data has a 'games' array
+    axios
+      .get("http://localhost:8000/games/top-rated-games/")
+      .then((response) => {
+        setGames(response.data.games);
       })
-      .catch(error => {
-        console.error('Error:', error);
+      .catch((error) => {
+        console.error("Error:", error);
       });
-  }, []); // Empty dependency array to fetch data only once when the component mounts
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/games/top-anticipated-games/")
+      .then((response) => {
+        setAnticipatedGames(response.data.anticipatedGames);
+        console.log(anticipatedGames);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, []);
+
+  const handleGameClick = (game) => {
+    setSelectedGame(game);
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
 
   return (
-    <div>
-      <h1>Discover Page</h1>
-      <div>
-        {games.map(game => (
-          <div key={game.id}>
-            <h2>{game.name}</h2>
-            <p>{game.summary}</p>
-            <p>Genres: {game.genres.map(genre => genre.name).join(', ')}</p>
-            <p>Platforms: {game.platforms.map(platform => platform.name).join(', ')}</p>
-            <p><a href={game.url}>More Info</a></p>
-            {game.cover && <img src={'https:' + game.cover.url} alt={game.name} />}
-          </div>
-        ))}
+    <>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <NavBar />
+        <h2 style={{ color: '#DFE0E2'}}>&lt;Top Rated Games&gt;</h2>
+
+        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
+          {games && games.map((game) => (
+            <GameCard key={game.id} game={game} onClick={() => handleGameClick(game)} />
+          ))}
+        </div>
+        {selectedGame && (
+          <GameDetailModal open={modalOpen} game={selectedGame} onClose={handleCloseModal} />
+        )}
+
+
+        <h2 style={{ color: '#DFE0E2'}}>&lt;Upcoming Games&gt;</h2>
+
+        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
+          {anticipatedGames && anticipatedGames.map((g) => (
+            <GameCard key={g.id} game={g} onClick={() => handleGameClick(g)} />
+          ))}
+        </div>
+        {selectedGame && (
+          <GameDetailModal open={modalOpen} game={selectedGame} onClose={handleCloseModal} />
+        )}
       </div>
-    </div>
-  );
+    </>
+  )
 }

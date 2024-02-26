@@ -9,13 +9,17 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const defaultTheme = createTheme();
 
 export default function SignupForm() {
+
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
+    username: "",
     email: "",
     password: "",
     re_password: "",
@@ -46,24 +50,11 @@ export default function SignupForm() {
         }
       );
 
-      // Store tokens in local storage
-      localStorage.setItem("access_token", response.data.access);
-      localStorage.setItem("refresh_token", response.data.refresh);
-
-      // Redirect or perform any other action after successful sign-up
       console.log("User signed up successfully");
-
-      // Fetch user list with JWT token
-      const userListResponse = await axios.get(
-        "http://localhost:8000/api/v1/auth/users/",
-        {
-          headers: {
-            Authorization: `Bearer ${response.data.access}`,
-          },
-        }
-      );
-
-      console.log("User list:", userListResponse.data);
+      localStorage.setItem("token", response.data.auth_token);
+      navigate("/discover");
+      
+      
     } catch (error) {
       console.error("Error signing up: ", error.message);
       toast.error("Failed to sign up. Please try again!");
@@ -97,6 +88,17 @@ export default function SignupForm() {
             onSubmit={handleSubmit}
             sx={{ mt: 3 }}
           >
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="username"
+              label="Username"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              sx={{ backgroundColor: "#DFE0E2" }}
+            />
             <TextField
               margin="normal"
               required

@@ -12,7 +12,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 
-const pages = ['Timeline', 'Discover', 'My Collection'];
+const pages = ['My Feed', 'Discover', 'My Collection'];
 const settings = ['Profile', 'Logout'];
 
 export default function NavBar() {
@@ -39,7 +39,7 @@ export default function NavBar() {
       <Container maxWidth="xl" sx={{ backgroundColor: '#071013' }}>
         <Toolbar disableGutters>
           <Typography
-            variant="h6"
+            variant="h4"
             noWrap
             sx={{
               mr: 2,
@@ -94,7 +94,7 @@ export default function NavBar() {
             variant="h5"
             noWrap
             sx={{
-              mr: 2,
+              mr: 3,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
               fontFamily: 'monospace',
