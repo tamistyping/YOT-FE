@@ -34,6 +34,11 @@ export default function NavBar() {
     setAnchorElUser(null);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    window.location.href = '/'
+  }
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl" sx={{ backgroundColor: '#071013' }}>
@@ -141,7 +146,7 @@ export default function NavBar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} onClick={setting === 'Logout' ? handleLogout : handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}

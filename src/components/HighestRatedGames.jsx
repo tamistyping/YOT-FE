@@ -42,7 +42,7 @@ export default function HighestRatedGames() {
                   component="img"
                   image={`https:${game.cover.url}`}
                   alt=""
-                  style={{ height: "100%", objectFit: "scale-down"}}
+                  style={{ width: "100%", objectFit: "cover"}}
                 />
               </Card>
             </div>
@@ -55,3 +55,5 @@ export default function HighestRatedGames() {
     </>
   );
 }
+
+// smallImage(image, 640)
