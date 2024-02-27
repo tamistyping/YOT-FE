@@ -14,7 +14,6 @@ export default function HighestRatedGames() {
       .get("http://localhost:8000/games/top-rated-games/")
       .then((response) => {
         setGames(response.data.games);
-        console.log(response.data.games)
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -42,7 +41,7 @@ export default function HighestRatedGames() {
                   component="img"
                   image={`https:${game.cover.url}`}
                   alt=""
-                  style={{ width: "100%", objectFit: "cover"}}
+                  style={{ width: "auto", objectFit: "cover"}}
                 />
               </Card>
             </div>

@@ -34,8 +34,8 @@ export default function SearchGames() {
   };
 
   useEffect(() => {
-    if(query) {
-    fetchData()
+    if (query) {
+      fetchData();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
@@ -43,7 +43,6 @@ export default function SearchGames() {
   const handleSubmit = (event) => {
     event.preventDefault();
     setQuery(event.target.value);
-    fetchData();
   };
   const handleGameClick = (game) => {
     setSelectedGame(game);
@@ -62,12 +61,17 @@ export default function SearchGames() {
           flexDirection: "column",
           alignItems: "center",
           maxWidth: "500px",
-          marginBottom: "80px"
+          marginBottom: "80px",
         }}
       >
         <h2 style={{ color: "#DFE0E2" }}>&lt;Upcoming Games&gt;</h2>
         <form onSubmit={handleSubmit}>
-          <input type="text" value={query} placeholder="Search games..." onChange={(e) => setQuery(e.target.value)}/>
+          <input
+            type="text"
+            value={query}
+            placeholder="Search games..."
+            onChange={(e) => setQuery(e.target.value)}
+          />
           <button type="submit">Search</button>
         </form>
 
@@ -81,13 +85,17 @@ export default function SearchGames() {
           {games.map((game) => (
             <div key={game.id} style={{ margin: "20px" }}>
               <Card onClick={() => handleGameClick(game)}>
-                <CardMedia
-                  component="img"
-                  width="auto"
-                  image={`https:${game.cover.url}`}
-                  alt=""
-                  sx={{ objectFit: "cover" }}
-                />
+                {game.cover && game.cover.url ? (
+                  <CardMedia
+                    component="img"
+                    width="auto"
+                    image={`https:${game.cover.url}`}
+                    alt=""
+                    sx={{ objectFit: "cover" }}
+                  />
+                ) : (
+                  <div>No Image Available</div>
+                )}
               </Card>
             </div>
           ))}

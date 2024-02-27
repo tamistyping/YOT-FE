@@ -11,6 +11,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import { Link } from 'react-router-dom'; 
 
 const pages = ['My Feed', 'Discover', 'My Collection'];
 const settings = ['Profile', 'Logout'];
@@ -35,9 +36,14 @@ export default function NavBar() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('token')
-    window.location.href = '/'
-  }
+    localStorage.removeItem('token');
+    window.location.href = '/';
+  };
+
+  const handleProfileClick = () => {
+    window.location.href = '/myprofile'; // Redirect to /myprofile route
+    handleCloseUserMenu(); // Close the menu after redirection
+  };
 
   return (
     <AppBar position="static">
@@ -146,7 +152,7 @@ export default function NavBar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={setting === 'Logout' ? handleLogout : handleCloseUserMenu}>
+                <MenuItem key={setting} onClick={setting === 'Profile' ? handleProfileClick : handleLogout}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}

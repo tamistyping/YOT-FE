@@ -39,8 +39,7 @@ export default function LoginForm() {
         }
       );
 
-      console.log("User signed up successfully");
-      localStorage.setItem("token", response.data.auth_token);
+      localStorage.setItem("token", response.data.access);
       navigate("/discover");
     } catch (error) {
       console.error("Error signing up: ", error.message);
