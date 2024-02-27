@@ -13,7 +13,7 @@ export default function App() {
       <Router>
         <Routes>
           <Route path="/" element={isLoggedIn ? <Navigate to="/discover" /> : <LandingPage />} />
-          <Route path="/feed" element={<FeedPage />} />
+          <Route path="/myfeed" element={<FeedPage />} />
           <Route path="/discover" element={<DiscoverPage />} />
           <Route path="/myprofile" element={<Profile />} />
         </Routes>

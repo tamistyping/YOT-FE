@@ -11,7 +11,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
 const pages = ['My Feed', 'Discover', 'My Collection'];
 const settings = ['Profile', 'Logout'];
@@ -94,8 +94,8 @@ export default function NavBar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+              {pages.map((page, index) => (
+                <MenuItem key={index} component={Link} to={`/${page.toLowerCase().replace(/\s/g, '')}`} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -118,9 +118,11 @@ export default function NavBar() {
             you on tonight?
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            {pages.map((page, index) => (
               <Button
-                key={page}
+                key={index}
+                component={Link}
+                to={`/${page.toLowerCase().replace(/\s/g, '')}`}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
@@ -151,8 +153,8 @@ export default function NavBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={setting === 'Profile' ? handleProfileClick : handleLogout}>
+              {settings.map((setting, index) => (
+                <MenuItem key={index} onClick={setting === 'Profile' ? handleProfileClick : handleLogout}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
