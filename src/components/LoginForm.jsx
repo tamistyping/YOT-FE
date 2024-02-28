@@ -41,6 +41,7 @@ export default function LoginForm() {
 
       localStorage.setItem("token", response.data.access);
       localStorage.setItem("refresh", response.data.refresh);
+      localStorage.setItem("username", formData.username);
       navigate("/discover");
     } catch (error) {
       console.error("Error signing up: ", error.message);

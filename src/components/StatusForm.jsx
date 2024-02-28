@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
-export default function StatusForm() {
+export default function StatusForm({onStatusAdded}) {
   const [content, setContent] = useState("");
   const [userId, setUserId] = useState(null);
 
@@ -43,10 +43,10 @@ export default function StatusForm() {
         },
         body: JSON.stringify({ content, user: userId }),
       });
-
       if (!response.ok) {
         throw new Error("Failed to create status");
       }
+      onStatusAdded();
 
       setContent("");
     } catch (error) {
