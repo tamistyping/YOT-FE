@@ -13,7 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
-const pages = ['My Feed', 'Discover', 'My Collection'];
+const pages = ['My Feed', 'Discover'];
 const settings = ['Profile', 'Logout'];
 
 export default function NavBar() {

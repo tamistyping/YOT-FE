@@ -50,9 +50,9 @@ export default function Profile() {
               <Typography variant="body1" sx={{ mt: 2 }}>
                   PROFILE PIC
                 </Typography>
-              <Typography variant="body1" sx={{ mt: 2 }}>
+              {/* <Typography variant="body1" sx={{ mt: 2 }}>
                   Bio: {profileData.bio} 
-                </Typography>
+                </Typography> */}
                 <Typography variant="h6">
                   Username: {profileData.username}
                 </Typography>
@@ -63,8 +63,6 @@ export default function Profile() {
                 <Typography variant="body1" sx={{ mt: 2 }}>
                   Name: {profileData.first_name} {profileData.last_name}
                 </Typography>
-
-                {/* Additional profile information */}
               </>
             )}
           </CardContent>

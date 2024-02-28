@@ -55,4 +55,3 @@ export default function HighestRatedGames() {
   );
 }
 
-// smallImage(image, 640)
