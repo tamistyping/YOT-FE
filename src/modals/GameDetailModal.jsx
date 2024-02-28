@@ -2,26 +2,42 @@ import React from 'react';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import LinearProgress from '@mui/material/LinearProgress';
+import { Button } from '@mui/material';
 
-const style = {
+const modalStyle = {
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 600, // Adjust the width of the modal
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
+  width: '80%',
+  maxWidth: 600,
+  bgcolor: '#1f2937',
+  borderRadius: '10px',
+  padding: '20px',
+  maxHeight: '80vh', 
+  overflowY: 'auto', 
 };
 
-export default function GameDetailModal({ open, game, onClose }) {
+const closeButtonStyle = {
+  position: 'absolute',
+  top: '10px',
+  right: '10px',
+  color: '#ff0000',
+};
+
+const GameDetailModal = ({ open, game, onClose }) => {
   const convertTimestampToDate = (timestamp) => {
     const date = new Date(timestamp * 1000); 
     return date.toLocaleDateString();
+  };
+
+  const getRatingColor = (rating) => {
+    if (rating >= 80) return '#4caf50';
+    if (rating >= 40) return '#ff9800';
+    return '#f44336';
   };
 
   return (
@@ -31,29 +47,48 @@ export default function GameDetailModal({ open, game, onClose }) {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box sx={style}>
-        <Typography id="modal-modal-title" variant="h6" component="h2">
+      <Box sx={modalStyle}>
+        <IconButton style={closeButtonStyle} onClick={onClose}>
+          <CloseIcon />
+        </IconButton>
+        <Typography variant="h5" gutterBottom style={{ color: '#FFFFFF' }}>
           {game.name}
         </Typography>
-        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+        <Typography variant="body1" gutterBottom style={{ color: '#FFFFFF' }}>
           Summary: {game.summary}
           <br />
           Release Date: {convertTimestampToDate(game.first_release_date)}
           <br />
           Rating: {Math.round(game.rating)}
         </Typography>
-        <Carousel showThumbs={false} showStatus={false} showArrows={true} showIndicators={false} infiniteLoop={true}>
+        <LinearProgress
+          variant="determinate"
+          value={game.rating}
+          sx={{
+            height: '10px',
+            borderRadius: '5px',
+            marginTop: '10px',
+            backgroundColor: '#555',
+            '& .MuiLinearProgress-bar': {
+              backgroundColor: getRatingColor(game.rating),
+            },
+          }}
+        />
+        <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: '10px' }}>
           {game.screenshots.map((screenshot, index) => (
-            <div key={index} >
-              <img src={`https:${screenshot.url}`} style={{ height: '30vmin', width: '40vmin', marginBottom: '3vmin', marginTop:  '3vmin' }} />
-            </div>
+            <img
+              key={index}
+              src={`https:${screenshot.url}`}
+              style={{ width: '150px', height: 'auto', marginRight: '10px', marginBottom: '10px' }}
+              alt={`Screenshot ${index + 1}`}
+            />
           ))}
-        </Carousel>
-        <Button onClick={onClose}>Close</Button>
-        <Button variant="contained" color="primary" component="a" href={game.url} target="_blank" rel="noopener noreferrer">
-          More Details
-        </Button>
+        </div>
+        <Button href={game.url} target="_blank" rel="noopener noreferrer" color="primary" variant="contained">More Details</Button>
       </Box>
     </Modal>
   );
-}
+};
+
+export default GameDetailModal;
+
