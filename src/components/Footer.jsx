@@ -14,7 +14,7 @@ export default function Footer() {
         backgroundColor: "#23B5D3", // Updated background color
         color: "white",
         bottom: 0,
-        width: "100%",
+        // width: "100%",
         display: "flex", // Added flex display
         justifyContent: "space-between", // Adjusted alignment
         alignItems: "center", // Center vertically

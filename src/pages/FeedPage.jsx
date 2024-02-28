@@ -16,6 +16,7 @@ export default function FeedPage() {
   return (
     <>
       <NavBar />
+      
       <div style={{ display: 'flex', alignContent: 'center', textAlign: 'center', flexDirection: "column" }}>
         <StatusForm onStatusAdded={handleStatusAdded} />
         <Status refresh={refresh} />

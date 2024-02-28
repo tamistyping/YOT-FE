@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import GameDetailModal from "../modals/GameDetailModal";
 
 export default function HighestRatedGames() {
@@ -32,19 +29,17 @@ export default function HighestRatedGames() {
 
   return (
     <>
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", maxWidth: '500px'}}>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", maxWidth: '100vmin'}}>
         <h2 style={{ color: '#DFE0E2' }}>&lt;Top Rated Games&gt;</h2>
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
           {games.map((game) => (
-            <div key={game.id} style={{ padding: '0', margin: "20px" }}>
-              <Card onClick={() => handleGameClick(game)}>
-                <CardMedia
-                  component="img"
-                  image={`https:${game.cover.url}`}
-                  alt=""
-                  style={{ width: "auto", objectFit: "cover"}}
-                />
-              </Card>
+            <div key={game.id} style={{ padding: '0', margin: "10px" }}>
+              <img
+                src={`https:${game.cover.url}`}
+                alt=""
+                style={{ width: 'auto', height: 'auto', objectFit: 'fill', cursor: 'pointer' }}
+                onClick={() => handleGameClick(game)}
+              />
             </div>
           ))}
         </div>
