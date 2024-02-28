@@ -27,19 +27,22 @@ export default function DiscoverPage() {
     setModalOpen(false);
   };
 
-
   return (
     <>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", maxWidth: '100vmin'}}>
         <h2 style={{ color: '#DFE0E2' }}>&lt;Top Rated Games&gt;</h2>
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
           {games.map((game) => (
-            <div key={game.id} style={{ padding: '0', margin: "10px" }}>
+            <div key={game.id} style={{ padding: '0', margin: "10px", width: '125px', height: '150px', position: 'relative' }}>
               <img
                 src={`https:${game.cover.url}`}
-                alt=""
-                style={{ width: 'auto', height: 'auto', objectFit: 'fill', cursor: 'pointer' }}
+                alt="Inside Cover"
+                loading="lazy"
+                decoding="async"
+                className="object-cover rounded-xl"
+                style={{ position: 'absolute', height: '100%', width: '100%', inset: '0', color: 'transparent', opacity: '1', transition: 'opacity 300ms ease-in 0ms', cursor: 'pointer', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.5)' }}
                 onClick={() => handleGameClick(game)}
+                
               />
             </div>
           ))}
@@ -50,4 +53,5 @@ export default function DiscoverPage() {
       </div>
     </>
   );
+
 }

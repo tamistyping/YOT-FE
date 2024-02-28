@@ -2,7 +2,7 @@
 import NavBar from "../components/NavBar";
 import HighestRatedGames from "../components/HighestRatedGames";
 import UpcomingGames from "../components/UpcomingGames"
-// import SearchGames from "../components/SearchGames";
+import SearchGames from "../components/SearchGames";
 import Footer from "../components/Footer"
 
 export default function DiscoverPage() {
@@ -19,7 +19,7 @@ export default function DiscoverPage() {
         <h1 style={{ color: 'white' }}>Discover Your Next Gaming Adventure!</h1>
         <HighestRatedGames />
         <UpcomingGames />
-        {/* <SearchGames /> */}
+        <SearchGames />
       </div>
         <Footer />
     </>
