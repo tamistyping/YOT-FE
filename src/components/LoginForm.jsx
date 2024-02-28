@@ -40,6 +40,7 @@ export default function LoginForm() {
       );
 
       localStorage.setItem("token", response.data.access);
+      localStorage.setItem("refresh", response.data.refresh);
       navigate("/discover");
     } catch (error) {
       console.error("Error signing up: ", error.message);

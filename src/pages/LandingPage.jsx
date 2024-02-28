@@ -1,17 +1,18 @@
-import { Button, Typography, Dialog, DialogContent } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import LoginForm from "../components/LoginForm";
-import SignupForm from "../modals/SignupForm";
+import SignupForm from "../components/SignupForm";
 import { useState } from "react";
 
 export default function LandingPage() {
-  const [openSignupModal, setOpenSignupModal] = useState(false);
+  const [scrollToSignup, setScrollToSignup] = useState(false);
 
-  const handleModalClick = () => {
-    setOpenSignupModal(true);
-  };
-
-  const handleCloseSignupModal = () => {
-    setOpenSignupModal(false);
+  const handleScrollToSignup = () => {
+    setScrollToSignup(true);
+    setTimeout(() => {
+      document
+        .getElementById("signup-form")
+        .scrollIntoView({ behavior: "smooth" });
+    }, 220); 
   };
 
   return (
@@ -24,7 +25,7 @@ export default function LandingPage() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        maxWidth: '100%'
+        maxWidth: "100%",
       }}
     >
       <LoginForm />
@@ -48,28 +49,26 @@ export default function LandingPage() {
           Don't have an account?
         </Typography>
       </div>
-      
+
       <div>
         <Button
           variant="contained"
           sx={{
-            color: 'white',
-            backgroundColor: '#75ABBC',
+            color: "white",
+            backgroundColor: "#75ABBC",
             mb: 1.3,
-            paddingRight: '30px',
-            paddingLeft: '30px',
+            paddingRight: "30px",
+            paddingLeft: "30px",
+            marginBottom: "30vmin"
           }}
-          onClick={handleModalClick}
+          onClick={handleScrollToSignup}
         >
           Click Here
         </Button>
       </div>
-      
-      <Dialog open={openSignupModal} onClose={handleCloseSignupModal}>
-        <DialogContent sx={{backgroundColor: 'black'}}>
-          <SignupForm handleClose={handleCloseSignupModal} />
-        </DialogContent>
-      </Dialog>
+      <div id="signup-form">
+        <SignupForm scrollToSignup={scrollToSignup} />
+      </div>
     </div>
   );
 }

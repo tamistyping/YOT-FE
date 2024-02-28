@@ -9,13 +9,11 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const defaultTheme = createTheme();
 
 export default function SignupForm() {
 
-  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -32,13 +30,6 @@ export default function SignupForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (formData.password !== formData.re_password) {
-      console.log("passwords don't match!");
-      toast.error("Passwords do not match!");
-      return;
-    }
-
     try {
       const response = await axios.post(
         "http://localhost:8000/api/v1/auth/users/",
@@ -49,12 +40,14 @@ export default function SignupForm() {
           },
         }
       );
-
-      console.log("User signed up successfully");
-      localStorage.setItem("token", response.data.auth_token);
-      navigate("/discover");
-      
-      
+  
+      console.log("User signed up successfully:", response.data);
+      toast.success("User signed up successfully! Please log in.");
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
+  
     } catch (error) {
       console.error("Error signing up: ", error.message);
       toast.error("Failed to sign up. Please try again!");
@@ -177,19 +170,3 @@ export default function SignupForm() {
     </ThemeProvider>
   );
 }
-
-// User Registration (Sign Up):
-
-// Endpoint: /auth/users/
-// Method: POST
-// This endpoint is used for registering a new user. You send a POST request with the user's data (such as email, password, etc.), and Djoser creates a new user if the data is valid.
-// User Login:
-
-// Endpoint: /auth/token/login/
-// Method: POST
-// This endpoint is used for user authentication. You send a POST request with the user's credentials (such as email and password), and Djoser returns an authentication token if the credentials are correct.
-// User Logout:
-
-// Endpoint: /auth/token/logout/
-// Method: POST
-// This endpoint is used to invalidate the user's token and log them out.
