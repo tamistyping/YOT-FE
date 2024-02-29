@@ -19,7 +19,7 @@ export default function Profile() {
 
   useEffect(() => {
     fetchProfileData();
-  }, [setSelectedImage]);
+  }, []);
 
   function getCookie(name) {
     const cookieValue = document.cookie
@@ -83,6 +83,7 @@ export default function Profile() {
 
       // Refresh profile data after successful upload
       fetchProfileData();
+      
   
       console.log("Profile picture uploaded:", uploadResponse.data);
     } catch (error) {
@@ -90,54 +91,45 @@ export default function Profile() {
     }
   };
   
-  
-
   return (
     <>
       <NavBar />
       <Container maxWidth="md" sx={{ mt: 4 }}>
         <Card elevation={4}>
           <CardContent>
-            <Typography variant="h4" gutterBottom>
-              Profile Information
-            </Typography>
+          <Typography variant="h4" gutterBottom sx={{ textAlign: 'center' }}>
+  {profileData && profileData.username}'s Profile
+</Typography>
             {loading ? (
               <Typography>Loading profile data...</Typography>
             ) : (
               <Grid container spacing={4}>
-                <Grid item xs={12} sm={4}>
+                <Grid item xs={12}>
                   <Paper elevation={2} sx={{ p: 2 }}>
-                    <Box
-                      display="flex"
-                      flexDirection="column"
-                      alignItems="center"
-                      mb={2}
-                    >
-                      {(
+                    <Box display="flex" flexDirection="column" alignItems="center">
+                      <Box mb={2} sx={{ position: 'relative' }}>
                         <Avatar
                           alt="Profile Picture"
                           src={`${localStorage.getItem("profile_picture_url")}`}
-                          sx={{ 
-                            width: 120, 
+                          sx={{
+                            width: 120,
                             height: 120,
                             objectFit: 'cover', // or 'contain' depending on your preference
                           }}
                         />
-                      )}
-                      <input
-                        type="file"
-                        accept="image/*"
-                        onChange={handleImageChange}
-                      />
-                      <button onClick={handleImageUpload}>Upload</button>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleImageChange}
+                          style={{ position: 'absolute', top: 0, left: 0, opacity: 0, width: '100%', height: '100%', cursor: 'pointer' }}
+                        />
+                      </Box>
+                      <button onClick={handleImageUpload} style={{ marginBottom: '8px', padding: '8px 16px', backgroundColor: '#4caf50', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Set Profile Picture</button>
+                      <button onClick={handleImageUpload} style={{ padding: '8px 16px', backgroundColor: '#2196f3', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Upload</button>
                     </Box>
-                    <Divider />
-                    <Typography variant="h6" mt={2}>
-                      {profileData.username}
-                    </Typography>
                   </Paper>
                 </Grid>
-                <Grid item xs={12} sm={8}>
+                <Grid item xs={12}>
                   <Paper elevation={2} sx={{ p: 2 }}>
                     <Typography variant="body1">
                       <strong>Email:</strong> {profileData.email}
@@ -145,9 +137,6 @@ export default function Profile() {
                     <Typography variant="body1">
                       <strong>Name:</strong> {profileData.first_name}{" "}
                       {profileData.last_name}
-                    </Typography>
-                    <Typography variant="body1">
-                      <strong>Bio:</strong> {profileData.bio}
                     </Typography>
                   </Paper>
                 </Grid>
@@ -158,5 +147,5 @@ export default function Profile() {
       </Container>
       <Footer />
     </>
-  );
+  )
 }
