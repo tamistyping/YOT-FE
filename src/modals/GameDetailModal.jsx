@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import LinearProgress from '@mui/material/LinearProgress';
-import { Button } from '@mui/material';
 
 const modalStyle = {
   position: 'absolute',
@@ -79,16 +78,14 @@ const GameDetailModal = ({ open, game, onClose }) => {
             <img
               key={index}
               src={`https:${screenshot.url}`}
-              style={{ width: '150px', height: 'auto', marginRight: '10px', marginBottom: '10px' }}
+              style={{ width: '150px', height: 'auto', marginRight: '10px', marginBottom: '10px', objectFit: 'contain' }}
               alt={`Screenshot ${index + 1}`}
             />
           ))}
         </div>
-        <Button href={game.url} target="_blank" rel="noopener noreferrer" color="primary" variant="contained">More Details</Button>
       </Box>
     </Modal>
   );
 };
 
 export default GameDetailModal;
-
