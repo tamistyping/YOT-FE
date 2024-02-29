@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -17,8 +17,14 @@ const pages = ['My Feed', 'Discover'];
 const settings = ['Profile', 'Logout'];
 
 export default function NavBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+  const [profilePictureUrl, setProfilePictureUrl] = useState('');
+
+  useEffect(() => {
+    const url = localStorage.getItem('profile_picture_url');
+    setProfilePictureUrl(url || ''); // Set profile picture URL from localStorage or empty string if not found
+  }, []);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -135,7 +141,7 @@ export default function NavBar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar src="/static/images/avatar/2.jpg" />
+                <Avatar src={profilePictureUrl} /> {/* Use profilePictureUrl here */}
               </IconButton>
             </Tooltip>
             <Menu

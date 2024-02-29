@@ -6,8 +6,8 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
+import Avatar from "@mui/material/Avatar";
 
 export default function Status({ refresh }) {
   const [statuses, setStatuses] = useState([]);
@@ -30,12 +30,12 @@ export default function Status({ refresh }) {
     }
   };
 
-  function getCookie(name) {
+  const getCookie = (name) => {
     const cookieValue = document.cookie
       .split("; ")
       .find((row) => row.startsWith(name + "="));
     return cookieValue ? decodeURIComponent(cookieValue.split("=")[1]) : null;
-  }
+  };
 
   const handleDelete = async (statusId) => {
     try {
@@ -61,8 +61,11 @@ export default function Status({ refresh }) {
     }
   };
 
-  const handleCloseModal = () => {
-    setSelectedStatus(null);
+  const handleDeleteConfirmation = (statusId) => {
+    const isConfirmed = window.confirm("Bro... are you SURE you want to delete this status?");
+    if (isConfirmed) {
+      handleDelete(statusId);
+    }
   };
 
   const calculateDaysAgo = (postedAt) => {
@@ -75,24 +78,23 @@ export default function Status({ refresh }) {
 
   return (
     <>
-      <Container maxWidth="sm" sx={{ mt: 4 }}>
+      <Container maxWidth="sm" sx={{ mt: 3 }}>
         {statuses.map((status) => (
-          <Card key={status.id} sx={{ mb: 2, position: 'relative' }}>
+          <Card key={status.id} sx={{ mb: 2, borderRadius: '10px', position: 'relative' }}>
             <CardContent>
-              <Typography variant="h6" gutterBottom>
-                {status.username} is on tonight!
+              <Box display="flex" alignItems="center">
+                <Typography variant="subtitle2" sx={{ fontWeight: 'bold' }}>@{status.username}</Typography>
+              </Box>
+              <Typography variant="body1" gutterBottom sx={{ mt: 1 }}>
+                {status.content}
               </Typography>
-              <Typography variant="body1" gutterBottom>
-               {status.content}
-              </Typography>
-              <Typography variant="body2" gutterBottom>
+              <Typography variant="body2" gutterBottom sx={{ color: 'text.secondary' }}>
                 Posted {calculateDaysAgo(status.created_at)}
               </Typography>
-              {/* Display delete button only if the status belongs to the logged-in user */}
               {status.username === localStorage.getItem("username") && (
                 <IconButton
                   sx={{ position: 'absolute', top: 0, right: 0 }}
-                  onClick={() => handleDelete(status.id)}
+                  onClick={() => handleDeleteConfirmation(status.id)}
                   color="error"
                 >
                   <CloseIcon />
@@ -102,44 +104,6 @@ export default function Status({ refresh }) {
           </Card>
         ))}
       </Container>
-      <Modal
-        open={!!selectedStatus}
-        onClose={handleCloseModal}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: "60%",
-            maxWidth: 600,
-            bgcolor: "#1f2937",
-            borderRadius: "10px",
-            p: 4,
-            maxHeight: "80vh",
-            overflowY: "auto",
-          }}
-        >
-          <IconButton
-            sx={{ position: "absolute", top: 0, right: 0, color: "#ff0000" }}
-            onClick={handleCloseModal}
-          >
-            <CloseIcon />
-          </IconButton>
-          <Typography variant="h5" gutterBottom style={{ color: "#FFFFFF" }}>
-            {selectedStatus?.username}'s Status
-          </Typography>
-          <Typography variant="body1" style={{ color: "#FFFFFF" }}>
-            Content: {selectedStatus?.content}
-          </Typography>
-          <Typography variant="body2" gutterBottom style={{ color: "#FFFFFF" }}>
-            Posted At: {selectedStatus?.created_at}
-          </Typography>
-        </Box>
-      </Modal>
     </>
   );
 }

@@ -26,6 +26,7 @@ export default function LandingPage() {
         flexDirection: "column",
         alignItems: "center",
         maxWidth: "100%",
+        overflowX: "hidden", // Prevent horizontal scrolling
       }}
     >
       <LoginForm />
