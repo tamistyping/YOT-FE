@@ -4,20 +4,16 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-// import LinearProgress from "@mui/material/LinearProgress";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 
 export default function Status({ refresh }) {
   const [statuses, setStatuses] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [selectedStatus, setSelectedStatus] = useState(null);
 
   useEffect(() => {
-    // Fetch statuses when component mounts
     fetchStatuses();
   }, [refresh]);
 
@@ -29,7 +25,6 @@ export default function Status({ refresh }) {
         },
       });
       setStatuses(response.data);
-      setLoading(false);
     } catch (error) {
       console.error("Error fetching statuses:", error);
     }
@@ -60,7 +55,6 @@ export default function Status({ refresh }) {
       if (!response.ok) {
         throw new Error("Failed to delete status");
       }
-      // Refresh statuses after successful delete
       fetchStatuses();
     } catch (error) {
       console.error("Error deleting status:", error);
@@ -83,7 +77,7 @@ export default function Status({ refresh }) {
     <>
       <Container maxWidth="sm" sx={{ mt: 4 }}>
         {statuses.map((status) => (
-          <Card key={status.id} sx={{ mb: 2 }}>
+          <Card key={status.id} sx={{ mb: 2, position: 'relative' }}>
             <CardContent>
               <Typography variant="h6" gutterBottom>
                 {status.username} is on tonight!
@@ -96,19 +90,18 @@ export default function Status({ refresh }) {
               </Typography>
               {/* Display delete button only if the status belongs to the logged-in user */}
               {status.username === localStorage.getItem("username") && (
-                <Button
+                <IconButton
+                  sx={{ position: 'absolute', top: 0, right: 0 }}
                   onClick={() => handleDelete(status.id)}
-                  variant="contained"
                   color="error"
                 >
-                  Delete
-                </Button>
+                  <CloseIcon />
+                </IconButton>
               )}
             </CardContent>
           </Card>
         ))}
       </Container>
-      {/* Status Details Modal */}
       <Modal
         open={!!selectedStatus}
         onClose={handleCloseModal}

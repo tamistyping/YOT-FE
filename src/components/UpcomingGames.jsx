@@ -30,7 +30,7 @@ export default function DiscoverPage() {
   return (
     <>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", maxWidth: '100vmin'}}>
-        <h2 style={{ color: '#DFE0E2' }}>&lt;Top Rated Games&gt;</h2>
+        <h2 style={{ color: '#DFE0E2' }}>&lt;Upcoming Games&gt;</h2>
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
           {games.map((game) => (
             <div key={game.id} style={{ padding: '0', margin: "10px", width: '125px', height: '150px', position: 'relative' }}>

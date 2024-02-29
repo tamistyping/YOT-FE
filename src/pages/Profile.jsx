@@ -15,19 +15,29 @@ import NavBar from "../components/NavBar";
 export default function Profile() {
   const [profileData, setProfileData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
-    // Fetch profile data when component mounts
     fetchProfileData();
-  }, []);
+  }, [setSelectedImage]);
+
+  function getCookie(name) {
+    const cookieValue = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith(name + "="));
+    return cookieValue ? decodeURIComponent(cookieValue.split("=")[1]) : null;
+  }
 
   const fetchProfileData = async () => {
     try {
+      const csrftoken = getCookie("csrftoken");
       const response = await axios.get(
         "http://localhost:8000/api/v1/auth/users/me/",
         {
           headers: {
+            "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "X-CSRFToken": csrftoken,
           },
         }
       );
@@ -38,6 +48,49 @@ export default function Profile() {
       setLoading(false);
     }
   };
+
+  const handleImageChange = (event) => {
+    setSelectedImage(event.target.files[0]);
+  };
+
+  const handleImageUpload = async () => {
+    if (!selectedImage) {
+      console.error("No file selected");
+      return;
+    }
+  
+    const formData = new FormData();
+    formData.append("photo-file", selectedImage);
+  
+    try {
+      const csrftoken = getCookie("csrftoken");
+      const userId = profileData.id;
+  
+      const uploadResponse = await axios.post(
+        `http://localhost:8000/api/v1/users/${userId}/add_photo/`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "X-CSRFToken": csrftoken,
+          },
+        }
+      );
+  
+      // Store the image URL in local storage
+      localStorage.setItem('profile_picture_url', uploadResponse.data.url);
+
+      // Refresh profile data after successful upload
+      fetchProfileData();
+  
+      console.log("Profile picture uploaded:", uploadResponse.data);
+    } catch (error) {
+      console.error("Error uploading profile picture:", error);
+    }
+  };
+  
+  
 
   return (
     <>
@@ -54,12 +107,29 @@ export default function Profile() {
               <Grid container spacing={4}>
                 <Grid item xs={12} sm={4}>
                   <Paper elevation={2} sx={{ p: 2 }}>
-                    <Box display="flex" justifyContent="center" mb={2}>
-                      <Avatar
-                        alt="Profile Picture"
-                        src={profileData.profile_pic}
-                        sx={{ width: 120, height: 120 }}
+                    <Box
+                      display="flex"
+                      flexDirection="column"
+                      alignItems="center"
+                      mb={2}
+                    >
+                      {(
+                        <Avatar
+                          alt="Profile Picture"
+                          src={`${localStorage.getItem("profile_picture_url")}`}
+                          sx={{ 
+                            width: 120, 
+                            height: 120,
+                            objectFit: 'cover', // or 'contain' depending on your preference
+                          }}
+                        />
+                      )}
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageChange}
                       />
+                      <button onClick={handleImageUpload}>Upload</button>
                     </Box>
                     <Divider />
                     <Typography variant="h6" mt={2}>
