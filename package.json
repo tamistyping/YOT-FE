@@ -35,7 +35,7 @@
       "react-app/jest"
     ]
   },
-  "browserslist": {git a
+  "browserslist": {
     "production": [
       ">0.2%",
       "not dead",
