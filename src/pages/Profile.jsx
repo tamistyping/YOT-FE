@@ -14,10 +14,11 @@ import { useProfile } from "../components/ProfileContext";
 
 export default function Profile() {
   const { profileData, loading, setProfileData } = useProfile(); 
-
   const [selectedImage, setSelectedImage] = useState(null);
 
+// eslint-disable-next-line
   useEffect(() => {
+// eslint-disable-next-line
     fetchProfileData(); 
   }, []);
 
