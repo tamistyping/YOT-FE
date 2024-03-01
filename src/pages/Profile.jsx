@@ -138,7 +138,7 @@ export default function Profile() {
                       <strong>Email:</strong> {profileData && profileData.email}
                     </Typography>
                     <Typography variant="body1">
-                      <strong>Name:</strong> {profileData && profileData.first_name}{" "}
+                      <strong>Full Name:</strong> {profileData && profileData.first_name}{" "}
                       {profileData && profileData.last_name}
                     </Typography>
                   </Paper>
