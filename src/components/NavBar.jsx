@@ -11,7 +11,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link } from 'react-router-dom'; 
 
 const pages = ['My Feed', 'Discover'];
 const settings = ['Profile', 'Logout'];
@@ -23,7 +23,7 @@ export default function NavBar() {
 
   useEffect(() => {
     const url = localStorage.getItem('profile_picture_url');
-    setProfilePictureUrl(url || ''); // Set profile picture URL from localStorage or empty string if not found
+    setProfilePictureUrl(url || ''); 
   }, []);
 
   const handleOpenNavMenu = (event) => {
@@ -48,8 +48,8 @@ export default function NavBar() {
   };
 
   const handleProfileClick = () => {
-    window.location.href = '/myprofile'; // Redirect to /myprofile route
-    handleCloseUserMenu(); // Close the menu after redirection
+    window.location.href = '/myprofile'; 
+    handleCloseUserMenu(); 
   };
 
   return (
@@ -141,7 +141,7 @@ export default function NavBar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar src={profilePictureUrl} /> {/* Use profilePictureUrl here */}
+                <Avatar src={profilePictureUrl} /> 
               </IconButton>
             </Tooltip>
             <Menu

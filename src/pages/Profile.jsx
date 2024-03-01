@@ -13,12 +13,12 @@ import NavBar from "../components/NavBar";
 import { useProfile } from "../components/ProfileContext";
 
 export default function Profile() {
-  const { profileData, loading, setProfileData } = useProfile(); // Remove setLoading from here
+  const { profileData, loading, setProfileData } = useProfile(); 
 
   const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
-    fetchProfileData(); // Directly call fetchProfileData without passing setLoading
+    fetchProfileData(); 
   }, []);
 
   function getCookie(name) {
@@ -32,7 +32,7 @@ export default function Profile() {
     try {
       const csrftoken = getCookie("csrftoken");
       const response = await axios.get(
-        "http://localhost:8000/api/v1/auth/users/me/",
+        `${process.env.REACT_APP_BACKEND_URL}/api/v1/auth/users/me/`, 
         {
           headers: {
             "Content-Type": "application/json",
@@ -62,7 +62,7 @@ export default function Profile() {
   
     try {
       const csrftoken = getCookie("csrftoken");
-      const userId = profileData?.id; // Add optional chaining to prevent accessing id property of null/undefined
+      const userId = profileData?.id; 
   
       if (!userId) {
         console.error("User ID not found");
@@ -70,7 +70,7 @@ export default function Profile() {
       }
   
       const uploadResponse = await axios.post(
-        `http://localhost:8000/api/v1/users/${userId}/add_photo/`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/v1/users/${userId}/add_photo/`,
         formData,
         {
           headers: {

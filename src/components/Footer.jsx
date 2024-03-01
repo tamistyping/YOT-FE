@@ -11,14 +11,14 @@ export default function Footer() {
       sx={{
         py: 1,
         px: 2,
-        backgroundColor: "#23B5D3", // Updated background color
+        backgroundColor: "#23B5D3", 
         color: "white",
         bottom: 0,
         width: "100%",
         position: "fixed",
-        display: "flex", // Added flex display
-        justifyContent: "space-between", // Adjusted alignment
-        alignItems: "center", // Center vertically
+        display: "flex", 
+        justifyContent: "space-between", 
+        alignItems: "center", 
       }}
     >
       <Container maxWidth="sm">

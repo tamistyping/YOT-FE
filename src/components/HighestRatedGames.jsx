@@ -9,7 +9,7 @@ export default function HighestRatedGames() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/games/top-rated-games/")
+      .get(`${process.env.REACT_APP_BACKEND_URL}/games/top-rated-games/`)
       .then((response) => {
         setGames(response.data.games);
       })
@@ -53,4 +53,4 @@ export default function HighestRatedGames() {
     </>
   );
 
-        }
+}

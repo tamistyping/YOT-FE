@@ -17,7 +17,7 @@ export const ProfileProvider = ({ children }) => {
     try {
       const csrftoken = getCookie("csrftoken");
       const response = await axios.get(
-        "http://localhost:8000/api/v1/auth/users/me/",
+        `${process.env.REACT_APP_BACKEND_URL}/api/v1/auth/users/me/`, 
         {
           headers: {
             "Content-Type": "application/json",
@@ -42,7 +42,7 @@ export const ProfileProvider = ({ children }) => {
   };
 
   return (
-    <ProfileContext.Provider value={{ profileData, loading, setProfileData }}> {/* Include setProfileData in the value */}
+    <ProfileContext.Provider value={{ profileData, loading, setProfileData }}>
       {children}
     </ProfileContext.Provider>
   );

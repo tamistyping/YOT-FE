@@ -10,23 +10,19 @@ export default function SearchGames() {
   const [modalOpen, setModalOpen] = useState(false);
   const [query, setQuery] = useState("");
 
-  // Define a function to fetch data based on the query
   const fetchData = async () => {
     try {
-      // Make the request with the current search query
       const response = await axios.get(
-        "http://localhost:8000/games/search-games/",
+        `${process.env.REACT_APP_BACKEND_URL}/games/search-games/`, 
         {
           params: {
-            query: query, // Replace this with your actual search query
+            query: query, 
           },
           headers: {
-            // Add any headers if required
             "Content-Type": "application/json",
           },
         }
       );
-      // Set the fetched games in state
       setGames(response.data.games);
     } catch (error) {
       console.error("Error:", error);

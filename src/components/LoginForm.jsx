@@ -30,7 +30,7 @@ export default function LoginForm() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/v1/auth/jwt/create/",
+        `${process.env.REACT_APP_BACKEND_URL}/api/v1/auth/jwt/create/`,
         formData,
         {
           headers: {

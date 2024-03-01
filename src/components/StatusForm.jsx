@@ -15,7 +15,7 @@ export default function StatusForm({ onStatusAdded }) {
   }
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/v1/auth/users/me/", {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/v1/auth/users/me/`, { 
       method: "GET",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -35,7 +35,7 @@ export default function StatusForm({ onStatusAdded }) {
     var csrftoken = getCookie("csrftoken");
 
     try {
-      const response = await fetch("http://localhost:8000/statuses/create/", {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/statuses/create/`, { 
         credentials: "include",
         method: "POST",
         headers: {
