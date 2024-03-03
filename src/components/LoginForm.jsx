@@ -28,6 +28,7 @@ export default function LoginForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Backend URL:", process.env.REACT_APP_BACKEND_URL);
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}/api/v1/auth/jwt/create/`,

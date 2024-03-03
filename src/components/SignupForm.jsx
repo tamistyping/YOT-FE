@@ -29,6 +29,7 @@ export default function SignupForm() {
   };
 
   const handleSubmit = async (e) => {
+    console.log(process.env.REACT_APP_BACKEND_URL)
     e.preventDefault();
     try {
       const response = await axios.post(
