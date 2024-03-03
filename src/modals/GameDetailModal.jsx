@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import LinearProgress from "@mui/material/LinearProgress";
+import Button from "@mui/material/Button";
 
 const modalStyle = {
   position: "absolute",
@@ -37,6 +38,10 @@ const GameDetailModal = ({ open, game, onClose }) => {
     if (rating >= 80) return "#4caf50";
     if (rating >= 40) return "#ff9800";
     return "#f44336";
+  };
+
+  const openGameLink = () => {
+    window.open(game.url, "_blank");
   };
 
   return (
@@ -92,7 +97,10 @@ const GameDetailModal = ({ open, game, onClose }) => {
           {game.screenshots.map((screenshot, index) => (
             <img
               key={index}
-              src={`https:${screenshot.url.replace("t_thumb", "t_screenshot_med_2x")}`}
+              src={`https:${screenshot.url.replace(
+                "t_thumb",
+                "t_screenshot_med_2x"
+              )}`}
               style={{
                 width: "150px",
                 height: "auto",
@@ -104,6 +112,14 @@ const GameDetailModal = ({ open, game, onClose }) => {
             />
           ))}
         </div>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={openGameLink}
+          style={{ marginTop: "10px" }}
+        >
+          View Game
+        </Button>
       </Box>
     </Modal>
   );
