@@ -62,8 +62,7 @@ export default function HighestRatedGames() {
               style={{
                 padding: "0",
                 margin: "10px",
-                width: "125px",
-                height: "150px",
+                width: '135px', height: '180px',
                 position: "relative",
               }}
             >

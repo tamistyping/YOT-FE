@@ -96,7 +96,7 @@ export default function Status({ refresh }) {
   };
 
   return (
-    <Container maxWidth="sm" sx={{ mt: 3 }}>
+    <Container maxWidth="sm" sx={{ mt: 3, mb: 5 }}>
       {statuses.map((status) => (
         <Card
           key={status.id}

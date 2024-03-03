@@ -44,7 +44,7 @@ export default function DiscoverPage() {
         <h2 style={{ color: '#DFE0E2' }}>&lt;Upcoming Games&gt;</h2>
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
           {games.map((game) => (
-            <div key={game.id} style={{ padding: '0', margin: "10px", width: '125px', height: '150px', position: 'relative' }}>
+            <div key={game.id} style={{ padding: '0', margin: "10px", width: '135px', height: '180px', position: 'relative' }}>
               <img
                 src={game.cover.url}
                 alt="Inside Cover"
