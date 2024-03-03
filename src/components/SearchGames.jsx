@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
@@ -12,7 +12,7 @@ export default function SearchGames() {
   const [modalOpen, setModalOpen] = useState(false);
   const [query, setQuery] = useState("");
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       const response = await axios.get(
         `${process.env.REACT_APP_BACKEND_URL}/games/search-games/`,
@@ -25,7 +25,7 @@ export default function SearchGames() {
           },
         }
       );
-      setGames(response.data.games.map(game => ({
+      setGames(response.data.games.map((game) => ({
         ...game,
         cover: {
           ...game.cover,
@@ -34,13 +34,6 @@ export default function SearchGames() {
       })));
     } catch (error) {
       console.error("Error:", error);
-    }
-  };
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    if (query) {
-      fetchData();
     }
   }, [query]);
 
@@ -57,6 +50,12 @@ export default function SearchGames() {
   const handleCloseModal = () => {
     setModalOpen(false);
   };
+
+  useEffect(() => {
+    if (query) {
+      fetchData();
+    }
+  }, [fetchData, query]);
 
   return (
     <>
@@ -81,11 +80,7 @@ export default function SearchGames() {
             style={{ backgroundColor: "white", marginBottom: "10px" }}
           />
           <div style={{ textAlign: "center" }}>
-            <Button
-              variant="contained"
-              color="primary"
-              type="submit"
-            >
+            <Button variant="contained" color="primary" type="submit">
               Search
             </Button>
           </div>
