@@ -8,7 +8,8 @@ export const useProfile = () => useContext(ProfileContext);
 export const ProfileProvider = ({ children }) => {
   const [profileData, setProfileData] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     fetchProfileData();
   }, []);

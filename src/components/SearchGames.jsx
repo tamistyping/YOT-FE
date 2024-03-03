@@ -37,6 +37,7 @@ export default function SearchGames() {
     }
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (query) {
       fetchData();
