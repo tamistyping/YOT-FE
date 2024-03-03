@@ -15,10 +15,14 @@ export default function StatusForm({ onStatusAdded }) {
   }
 
   useEffect(() => {
+    const csrftoken = getCookie("csrftoken");
     fetch(`${process.env.REACT_APP_BACKEND_URL}/api/v1/auth/users/me/`, { 
+
       method: "GET",
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "X-CSRFToken": csrftoken,
       },
     })
       .then((response) => response.json())
@@ -61,7 +65,7 @@ export default function StatusForm({ onStatusAdded }) {
   };
 
   return (
-    <Box sx={{ width: "75%", margin: "0 auto" }}>
+    <Box sx={{ width: "55%", margin: "0 auto" }}>
       <form onSubmit={handleSubmit}>
         <Box
           sx={{

@@ -11,7 +11,7 @@ export const ProfileProvider = ({ children }) => {
 
   useEffect(() => {
     fetchProfileData();
-  },);
+  }, []);
 
   const fetchProfileData = async () => {
     try {

@@ -11,7 +11,18 @@ export default function DiscoverPage() {
     axios
       .get(`${process.env.REACT_APP_BACKEND_URL}/games/top-anticipated-games/`) 
       .then((response) => {
-        setGames(response.data.games);
+        // Update the cover URL to fetch higher resolution images
+        const updatedGames = response.data.games.map((game) => ({
+          ...game,
+          cover: {
+            ...game.cover,
+            url: `https:${game.cover.url.replace(
+              "t_thumb",
+              "t_cover_big_2x"
+            )}`,
+          },
+        }));
+        setGames(updatedGames);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -35,7 +46,7 @@ export default function DiscoverPage() {
           {games.map((game) => (
             <div key={game.id} style={{ padding: '0', margin: "10px", width: '125px', height: '150px', position: 'relative' }}>
               <img
-                src={`https:${game.cover.url}`}
+                src={game.cover.url}
                 alt="Inside Cover"
                 loading="lazy"
                 decoding="async"

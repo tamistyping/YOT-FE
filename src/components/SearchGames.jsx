@@ -3,6 +3,8 @@ import axios from "axios";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import GameDetailModal from "../modals/GameDetailModal";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 
 export default function SearchGames() {
   const [games, setGames] = useState([]);
@@ -13,17 +15,23 @@ export default function SearchGames() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/games/search-games/`, 
+        `${process.env.REACT_APP_BACKEND_URL}/games/search-games/`,
         {
           params: {
-            query: query, 
+            query: query,
           },
           headers: {
             "Content-Type": "application/json",
           },
         }
       );
-      setGames(response.data.games);
+      setGames(response.data.games.map(game => ({
+        ...game,
+        cover: {
+          ...game.cover,
+          url: `https:${game.cover.url.replace("t_thumb", "t_cover_big_2x")}`
+        }
+      })));
     } catch (error) {
       console.error("Error:", error);
     }
@@ -33,13 +41,13 @@ export default function SearchGames() {
     if (query) {
       fetchData();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setQuery(event.target.value);
+    fetchData();
   };
+
   const handleGameClick = (game) => {
     setSelectedGame(game);
     setModalOpen(true);
@@ -56,19 +64,30 @@ export default function SearchGames() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          maxWidth: "500px",
-          marginBottom: "80px",
+          maxWidth: "800px",
+          margin: "0 auto",
         }}
       >
-        <h2 style={{ color: "#DFE0E2" }}>&lt;Upcoming Games&gt;</h2>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
+        <h2 style={{ color: "#DFE0E2", marginBottom: "20px" }}>
+          &lt;Search Games&gt;
+        </h2>
+        <form onSubmit={handleSubmit} style={{ marginBottom: "20px" }}>
+          <TextField
+            label="Search games..."
+            variant="outlined"
             value={query}
-            placeholder="Search games..."
             onChange={(e) => setQuery(e.target.value)}
+            style={{ backgroundColor: "white", marginBottom: "10px" }}
           />
-          <button type="submit">Search</button>
+          <div style={{ textAlign: "center" }}>
+            <Button
+              variant="contained"
+              color="primary"
+              type="submit"
+            >
+              Search
+            </Button>
+          </div>
         </form>
 
         <div
@@ -80,14 +99,17 @@ export default function SearchGames() {
         >
           {games.map((game) => (
             <div key={game.id} style={{ margin: "20px" }}>
-              <Card onClick={() => handleGameClick(game)}>
+              <Card
+                onClick={() => handleGameClick(game)}
+                style={{ cursor: "pointer", maxWidth: "300px" }}
+              >
                 {game.cover && game.cover.url ? (
                   <CardMedia
                     component="img"
-                    width="auto"
-                    image={`https:${game.cover.url}`}
+                    height="200"
+                    image={game.cover.url}
                     alt=""
-                    sx={{ objectFit: "cover" }}
+                    style={{ objectFit: "cover" }}
                   />
                 ) : (
                   <div>No Image Available</div>
@@ -104,6 +126,7 @@ export default function SearchGames() {
           />
         )}
       </div>
+      <div style={{ marginBottom: "100px" }}></div>
     </>
   );
 }

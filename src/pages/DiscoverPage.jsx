@@ -16,14 +16,16 @@ export default function DiscoverPage() {
         }}
       >
         <NavBar />
-        <h1 style={{ 
-          color: 'white',
-          width: '70%',
-          textAlign: 'left', 
-          boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)',
-          padding: '20px', 
-          margin: '10px auto' 
-        }}>Discover Your Next Gaming Adventure!</h1>
+        <div style={{ textAlign: 'center', width: '70%', margin: '0 auto', position: 'relative' }}>
+          <h1 style={{ 
+            color: 'white',
+            textAlign: 'center',
+            fontSize: '2.5em',
+            marginBottom: '20px',
+          }}>
+            <span style={{ fontWeight: 'bold', letterSpacing: '2px' }}>Discover</span> Your Next Gaming Adventure!
+          </h1>
+        </div>
         <HighestRatedGames />
         <UpcomingGames />
         <SearchGames />

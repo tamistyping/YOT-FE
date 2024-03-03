@@ -11,7 +11,18 @@ export default function HighestRatedGames() {
     axios
       .get(`${process.env.REACT_APP_BACKEND_URL}/games/top-rated-games/`)
       .then((response) => {
-        setGames(response.data.games);
+        // Update the cover URL to fetch higher resolution images
+        const updatedGames = response.data.games.map((game) => ({
+          ...game,
+          cover: {
+            ...game.cover,
+            url: `https:${game.cover.url.replace(
+              "t_thumb",
+              "t_cover_big_2x"
+            )}`,
+          },
+        }));
+        setGames(updatedGames);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -29,28 +40,63 @@ export default function HighestRatedGames() {
 
   return (
     <>
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", maxWidth: '100vmin'}}>
-        <h2 style={{ color: '#DFE0E2' }}>&lt;Top Rated Games&gt;</h2>
-        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          maxWidth: "100vmin",
+        }}
+      >
+        <h2 style={{ color: "#DFE0E2" }}>&lt;Top Rated Games&gt;</h2>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+          }}
+        >
           {games.map((game) => (
-            <div key={game.id} style={{ padding: '0', margin: "10px", width: '125px', height: '150px', position: 'relative' }}>
+            <div
+              key={game.id}
+              style={{
+                padding: "0",
+                margin: "10px",
+                width: "125px",
+                height: "150px",
+                position: "relative",
+              }}
+            >
               <img
-                src={`https:${game.cover.url}`}
+                src={game.cover.url}
                 alt="Inside Cover"
                 loading="lazy"
                 decoding="async"
                 className="object-cover rounded-xl"
-                style={{ boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.5)', position: 'absolute', height: '100%', width: '100%', inset: '0', color: 'transparent', opacity: '1', transition: 'opacity 300ms ease-in 0ms', cursor: 'pointer'}}
+                style={{
+                  boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.5)",
+                  position: "absolute",
+                  height: "100%",
+                  width: "100%",
+                  inset: "0",
+                  color: "transparent",
+                  opacity: "1",
+                  transition: "opacity 300ms ease-in 0ms",
+                  cursor: "pointer",
+                }}
                 onClick={() => handleGameClick(game)}
               />
             </div>
           ))}
         </div>
         {selectedGame && (
-          <GameDetailModal open={modalOpen} game={selectedGame} onClose={handleCloseModal} />
+          <GameDetailModal
+            open={modalOpen}
+            game={selectedGame}
+            onClose={handleCloseModal}
+          />
         )}
       </div>
     </>
   );
-
 }
