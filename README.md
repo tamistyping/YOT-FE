@@ -15,7 +15,6 @@
 </ul>
 
 <h2>Plan</h2>
-<br/>
 <h4>I created a wireframe using Figma, sticking to a slick, but simple design.</h4>
 
 <H4>After wireframing, I mapped out tasks into a Trello board to organize the project</H4>
