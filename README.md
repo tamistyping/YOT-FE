@@ -16,10 +16,15 @@
 
 <h2>Plan</h2>
 <h4>I created a wireframe using Figma, sticking to a slick, but simple design.</h4>
+![Screenshot 2024-03-06 at 11 17 48](https://github.com/tamistyping/YOT-FE/assets/114356636/ab8e6981-0952-485b-adaa-536f42f49bd3)
 
 <H4>After wireframing, I mapped out tasks into a Trello board to organize the project</H4>
+<img width="1422" alt="Screenshot 2024-02-23 at 09 29 07" src="https://github.com/tamistyping/YOT-FE/assets/114356636/054c5a83-faac-41c0-8bf5-07c644c7c0ba">
+
 
 <h4>I also mapped out a simple Entity Relationship Diagram</h4>
+<img width="588" alt="Screenshot 2024-02-23 at 09 34 33" src="https://github.com/tamistyping/YOT-FE/assets/114356636/446900e0-349b-4c17-8d3f-8b6e2a8c61b0">
+
 
 <h2>Coding</h2>
 
