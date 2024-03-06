@@ -16,7 +16,7 @@
 
 <h2>Plan</h2>
 <h4>I created a wireframe using Figma, sticking to a slick, but simple design.</h4>
-![Screenshot 2024-03-06 at 11 17 48](https://github.com/tamistyping/YOT-FE/assets/114356636/ab8e6981-0952-485b-adaa-536f42f49bd3)
+![Screenshot 2024-03-06 at 11 23 14](https://github.com/tamistyping/YOT-FE/assets/114356636/aeb977ec-ff9a-48eb-8fea-68489886ad44)
 
 <H4>After wireframing, I mapped out tasks into a Trello board to organize the project</H4>
 <img width="1422" alt="Screenshot 2024-02-23 at 09 29 07" src="https://github.com/tamistyping/YOT-FE/assets/114356636/054c5a83-faac-41c0-8bf5-07c644c7c0ba">
