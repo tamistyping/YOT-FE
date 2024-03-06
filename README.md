@@ -16,8 +16,6 @@
 
 <h2>Plan</h2>
 <h4>I created a wireframe using Figma, sticking to a slick, but simple design.</h4>
-<img src="https://raw.githubusercontent.com/tamistyping/YOT-FE/assets/114356636/599e4357-1cde-4104-8ec4-d2199ba9f644/Screenshot%202024-03-06%20at%2011.27.31.png" alt="Wireframe Screenshot">
-
 
 
 
@@ -31,8 +29,29 @@
 
 <h2>Coding</h2>
 
+<h3>Models & Views</h3>
+<p>I began by shaping my backend by defining my models.</p>
+
+<h3>Djoser</h3>
+<p>i utlized Djoser for my User auth. I tested these via Postman</p>
+
+<h3>Displaying API</h3>
+<p>I worked with MaterialUI to utlize cards and boxes to display my game cards on the discover page.</p>
+
+<h3>Statuses</h3>
+<p>I was running out of time on the deadline, so I made the statuses simpler by just having a content option.</p>
+
+<h3>Profile</h3>
+<p>I made use of AWS S3 buckets so that the user could upload a profile picture</p>
+
 <h2>Challenges</h2>
+<h3>Time</h3>
+<p>I left out features such as showcasing what game the user is currently playing , and my collection due to time cosntriant</p>
 
 <h2>Successes</h2>
+<h3>Happy with the UI</h3>
+<h3>Learnt about djoser</h3>
 
 <h2>Future Improvements</h2>
+<h3>Features</h3>
+<p>Friend requests, like and comment under statuses</p>
