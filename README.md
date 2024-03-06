@@ -16,7 +16,8 @@
 
 <h2>Plan</h2>
 <h4>I created a wireframe using Figma, sticking to a slick, but simple design.</h4>
-![Screenshot 2024-03-06 at 11 27 31](https://github.com/tamistyping/YOT-FE/assets/114356636/599e4357-1cde-4104-8ec4-d2199ba9f644)
+<img src="https://github.com/tamistyping/YOT-FE/blob/assets/114356636/599e4357-1cde-4104-8ec4-d2199ba9f644/Screenshot%202024-03-06%20at%2011.27.31.png?raw=true" alt="Wireframe Screenshot">
+
 
 
 <H4>After wireframing, I mapped out tasks into a Trello board to organize the project</H4>
