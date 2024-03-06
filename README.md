@@ -1,9 +1,10 @@
 <h1>You on Tonight?</h1>
 <p>Built using Django, PostgreSQL and React; You on Tonight is a Social Media website for Gamers where users can post statuses and discover games to play.</p>
 
-<h1>Deployment Link</h1>
+<h3>Deployment Link</h3>
 <p>https://youontonight.netlify.app/</p>
-<h3>Backend link: https://github.com/tamistyping/YOT-BE</h3>
+<h3>Backend link:</h3>
+https://github.com/tamistyping/YOT-BE
 
 <h1>Brief</h1>
 <ul>
